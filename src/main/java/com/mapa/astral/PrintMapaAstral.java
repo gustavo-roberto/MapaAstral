@@ -28,7 +28,7 @@ public class PrintMapaAstral {
         ZonedDateTime birthDatePlace = ZonedDateTime.of(birthDate, birthPlaceZoneId);
 
         System.out.println("Sua idade é: " + UtilService.getAgeInYears(birthDatePlace));
-        System.out.println("Ano de nascimento bissexto: " + Year.isLeap(birthDatePlace.getYear()));
+        System.out.println("Você " + UtilService.verifyLeapYear(birthDatePlace) + " em ano bissexto" );
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         System.out.println("Data de nascimento formatada: " + UtilService.getFormattedDate(birthDatePlace));

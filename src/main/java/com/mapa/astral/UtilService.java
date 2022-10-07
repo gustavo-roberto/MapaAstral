@@ -18,6 +18,16 @@ public class UtilService {
                 .toLocalDateTime();
     }
 
+    public static String verifyLeapYear(ZonedDateTime birthDatePlace) {
+        if (Year.isLeap(birthDatePlace.getYear())) {
+            return "nasceu";
+        }
+        else
+        {
+            return "não nasceu";
+        }
+    }
+
     public static String getZoneOffSet(ZonedDateTime birthDatePlace) {
         return birthDatePlace.getOffset().toString();
     }

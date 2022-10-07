@@ -40,7 +40,8 @@ public class AscendantsService {
     }
 
     private static boolean isTimeBetween(LocalTime initAscendantHour, LocalTime lastAscendantHour, LocalTime birthTime) {
-        return birthTime.isAfter(initAscendantHour) && birthTime.isBefore(lastAscendantHour);
+        return (birthTime.isAfter(initAscendantHour) && birthTime.isBefore(lastAscendantHour))
+                || (birthTime.equals(initAscendantHour) || birthTime.equals(lastAscendantHour));
     }
 
 }
