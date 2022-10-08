@@ -3,6 +3,8 @@ package com.mapa.astral;
 import java.text.ParseException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.zone.ZoneRules;
+import java.time.zone.ZoneRulesException;
 import java.util.Scanner;
 
 public class PrintMapaAstral {
@@ -15,16 +17,24 @@ public class PrintMapaAstral {
         String name = scan.nextLine();
 
         System.out.println(name + ", em que ano e hora você nasceu? Digite no formato dd/MM/yyyy HH:mm");
-        LocalDateTime birthDate;
+        LocalDateTime birthDate = null;
         try
         {
             birthDate = UtilService.formatStringToDate(scan.nextLine());
         } catch (ParseException e) {
-            throw new RuntimeException("A data foi digitada de maneira errônea. Reinicie a aplicação");
+            System.out.println("A data foi digitada de maneira errônea. Reinicie o programa");
+            System.exit(1);
         }
 
-        System.out.println("Como você nasceu em São Paulo (você não tem opção, por enquanto), então:");
-        ZoneId birthPlaceZoneId = ZoneId.of("America/Sao_Paulo");
+        System.out.println("Digite um ZoneId válido (Por exemplo, 'America/Sao_Paulo'):");
+        ZoneId birthPlaceZoneId = null;
+        try {
+            birthPlaceZoneId = ZoneId.of(scan.nextLine());
+        } catch(ZoneRulesException ex) {
+            System.out.println("Você digitou um zoneId inválido. Reinicie o programa.");
+            System.exit(1);
+        }
+
         ZonedDateTime birthDatePlace = ZonedDateTime.of(birthDate, birthPlaceZoneId);
 
         System.out.println("Sua idade é: " + UtilService.getAgeInYears(birthDatePlace));
