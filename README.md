@@ -1,4 +1,4 @@
-# MapaAstral
+# MapaAstral :mage::star2:
 
 Programa realizado para atividade da LetsCode sobre a biblioteca java.time.
 
