@@ -36,4 +36,34 @@ public class UtilService {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return birthDatePlace.toLocalDateTime().format(format);
     }
+
+    public static String getZoneId(String stringZoneId) {
+        stringZoneId = stringZoneId.replace(" ", "_").toLowerCase();
+        for (String zoneId : ZoneId.getAvailableZoneIds()) {
+            if (zoneId.toLowerCase().contains(stringZoneId)) {
+                return zoneId;
+            }
+        }
+
+        return null;
+    }
+
+    public static String printfFormattedZoneId(ZoneId zoneId) {
+        StringBuilder builder = new StringBuilder();
+        String zoneIdString = zoneId.toString();
+
+        if (zoneIdString.contains("/")) {
+            String[] locals = zoneId.toString().split("/");
+            String continent = locals[0];
+            String city = locals[1];
+
+            builder.append(continent + " continent, ");
+            builder.append(city.replace("_"," ") + " city");
+        }
+        else {
+            builder.append(zoneIdString.replace("_", " "));
+        }
+
+        return builder.toString();
+    }
 }
